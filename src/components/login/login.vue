@@ -54,32 +54,62 @@ export default {
   methods: {
     login() {
       // 判断 form 中的元素是否满足验证条件
-      this.$refs.ruleForm.validate(valid => {
+      //使用ES7中的async和await以同步的方式来书写异步的代码
+      this.$refs.ruleForm.validate(async valid => {
         if (valid) {
           //发送登录请求
-          this.$http.post("/login", this.ruleForm).then(res => {
-            //解构参数
-            let { meta, data } = res.data;
-            //判断登录状况
-            if (meta.status == 200) {
-              this.$message({
-                message: meta.msg,
-                type: "success"
-              });
-              //跳转到首页
-              this.$router.push("/home");
-              //将登录中的token保存到浏览器中的localstorage
-              //   console.log(res.data.data.token);//token
-              localStorage.setItem("token", res.data.data.token);
-            } else {
-              this.$message.error(meta.msg);
-            }
-          });
+          let res = await this.$http.post("login", this.ruleForm);
+          // console.log(res);
+          //解构参数
+          let { meta, data } = res.data;
+          //判断登录状况
+          if (meta.status == 200) {
+            this.$message({
+              message: meta.msg,
+              type: "success"
+            });
+            //跳转到首页
+            this.$router.push("/home");
+            //将登录中的token保存到浏览器中的localstorage
+            //   console.log(res.data.data.token);//token
+            localStorage.setItem("token", res.data.data.token);
+          } else {
+            this.$message.error(meta.msg);
+          }
         } else {
           this.$message.error("请输入正确的用户名和密码!");
           return false;
         }
       });
+
+      //以前的方法
+      //   this.$refs.ruleForm.validate(valid => {
+      //     if (valid) {
+      //       //发送登录请求
+      //       this.$http.post("/login", this.ruleForm).then(res => {
+      //         console.log(res);
+      //         //解构参数
+      //         let { meta, data } = res.data;
+      //         //判断登录状况
+      //         if (meta.status == 200) {
+      //           this.$message({
+      //             message: meta.msg,
+      //             type: "success"
+      //           });
+      //           //跳转到首页
+      //           this.$router.push("/home");
+      //           //将登录中的token保存到浏览器中的localstorage
+      //           //   console.log(res.data.data.token);//token
+      //           localStorage.setItem("token", res.data.data.token);
+      //         } else {
+      //           this.$message.error(meta.msg);
+      //         }
+      //       });
+      //     } else {
+      //       this.$message.error("请输入正确的用户名和密码!");
+      //       return false;
+      //     }
+      //   });
     }
   }
 };

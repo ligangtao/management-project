@@ -5,6 +5,8 @@ import Login from '../components/login/login.vue';
 import UserElement from '../components/userElement.vue';
 import Home from '../components/home/home.vue';
 import Users from '../components/users/users.vue';
+import Rights from '../components/rights/rights.vue';
+import Roles from  '../components/roles/roles.vue';
 
 Vue.use(Router)
 
@@ -18,7 +20,9 @@ export default new Router({
     //给home添加子路由
     {
       path: '/home', name: "home", component: Home, children: [
-        { path: '/users', name: 'users', component: Users }
+        { path: '/users', name: 'users', component: Users },//添加一个home的子路由users
+        { path: '/rights', name: 'rights', component: Rights },//添加一个home的子路由rights
+        { path: '/roles', name: 'roles', component: Roles },//添加一个home的子路由rights
       ]
     }//home主页的路由
   ]
