@@ -68,11 +68,11 @@ export default {
               message: meta.msg,
               type: "success"
             });
-            //跳转到首页
-            this.$router.push("/home");
             //将登录中的token保存到浏览器中的localstorage
             //   console.log(res.data.data.token);//token
             localStorage.setItem("token", res.data.data.token);
+            //跳转到首页
+            this.$router.push("/home");
           } else {
             this.$message.error(meta.msg);
           }

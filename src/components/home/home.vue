@@ -28,11 +28,11 @@ export default {
   //进入页面执行的代码
   mounted() {
     //判断页面是否存在token
-    let token = window.localStorage.getItem("token");
-    if (!token) {
-      //跳转回登录页面
-      this.$router.push("/login");
-    }
+    // let token = window.localStorage.getItem("token");
+    // if (!token) {
+    //   //跳转回登录页面
+    //   this.$router.push("/login");
+    // }
   },
   components: {
     Tophead,

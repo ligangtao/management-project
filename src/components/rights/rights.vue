@@ -40,7 +40,7 @@ export default {
   methods: {
     async getAllRights() {
       let res = await this.$http.get(`rights/list`);
-      console.log(res);
+      // console.log(res);
       //解构赋值
       let { meta, data } = res.data;
       //判断
